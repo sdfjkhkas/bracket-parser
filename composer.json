@@ -10,7 +10,9 @@
             "email": "sdfjkhkasxvsdasadfa@hotmail.com"
         }
     ],
-    "require": {},
+    "require": {
+        "php": "7.4.*"
+    },
     "autoload": {
         "psr-4": {
             "App\\":"src/"
