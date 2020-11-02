@@ -6,23 +6,23 @@ use InvalidArgumentException;
 
 class Parser
 {
-    private string $str;
+    private static string $str;
 
     function __construct(string $str)
     {
-        $this->str = $str;
+        self::$str = $str;
         $this->clean();
         $this->checkValid();
     }
 
     private function clean(): void
     {
-        $this->str = trim($this->str);
+        self::$str = trim(self::$str);
     }
 
     private function checkValid()
     {
-        preg_match("/[^)(]+/", $this->str, $matches);
+        preg_match("/[^)(]+/", self::$str, $matches);
         if (count($matches) != 0)
             throw new InvalidArgumentException("Incorrect symbols!");
     }
