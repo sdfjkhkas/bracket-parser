@@ -56,7 +56,3 @@ class Parser
         }
     }
 }
-
-$string = "(((())()()))()()()))g)()";
-$parser = new Parser($string);
-var_dump($parser::parse());
