@@ -22,7 +22,7 @@ class Parser
 
     private function checkValid()
     {
-        preg_match_all("/[^()]+/", $this->str, $matches);
+        preg_match("/[^)(]+/", $this->str, $matches);
         if (count($matches) != 0)
             throw new InvalidArgumentException("Incorrect symbols!");
     }
@@ -56,3 +56,7 @@ class Parser
         }
     }
 }
+
+$string = "(((())()()))()()()))g)()";
+$parser = new Parser($string);
+var_dump($parser::parse());
