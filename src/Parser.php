@@ -27,29 +27,29 @@ class Parser
             throw new InvalidArgumentException("Incorrect symbols!");
     }
 
-    public function parse(): bool
+    public static function parse(): bool
     {
-        $strLength = strlen($this->str);
-        if ((substr_count($this->str, ')') != substr_count($this->str, '(')) || ($strLength % 2 === 1)) {
+        $strLength = strlen(self::$str);
+        if ((substr_count(self::$str, ')') != substr_count(self::$str, '(')) || ($strLength % 2 === 1)) {
             return false;
         } else {
-            if ($this->str[0] === ')' || $this->str[$strLength - 1] === '(') {
+            if (self::$str[0] === ')' || self::$str[$strLength - 1] === '(') {
                 return false;
             }
         }
 
         $changeCheck = true;
-        $lastStrLength = strlen($this->str);
+        $lastStrLength = strlen(self::$str);
         while ($changeCheck === true) {
-            $strLength = strlen($this->str);
-            $this->str = str_replace('()', '', $this->str);
-            $lastStrLength = strlen($this->str);
+            $strLength = strlen(self::$str);
+            self::$str = str_replace('()', '', self::$str);
+            $lastStrLength = strlen(self::$str);
             if ($strLength === $lastStrLength || $lastStrLength === 0) {
                 $changeCheck = false;
             }
         }
 
-        if (strlen($this->str) === 0) {
+        if (strlen(self::$str) === 0) {
             return true;
         } else {
             return false;
