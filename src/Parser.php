@@ -23,7 +23,7 @@ class Parser
     private function checkValid()
     {
         preg_match("/[^)(]+/", self::$str, $matches);
-        if (count($matches) != 0)
+        if (count($matches) != 0 || strlen(self::$str) === 0)
             throw new InvalidArgumentException("Incorrect symbols!");
     }
 
