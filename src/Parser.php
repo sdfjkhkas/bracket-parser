@@ -12,7 +12,6 @@ class Parser
     {
         self::$str = $str;
         $this->clean();
-        $this->checkValid();
     }
 
     private function clean(): void
@@ -20,7 +19,7 @@ class Parser
         self::$str = trim(self::$str);
     }
 
-    private function checkValid()
+    private static function checkValid()
     {
         preg_match("/[^)(]+/", self::$str, $matches);
         if (count($matches) != 0 || strlen(self::$str) === 0)
@@ -29,8 +28,10 @@ class Parser
 
     public static function parse(): bool
     {
+        self::checkValid();
+
         $strLength = strlen(self::$str);
-        if ((substr_count(self::$str, ')') != substr_count(self::$str, '(')) || ($strLength % 2 === 1)) {
+        if (($strLength % 2 === 1) || (substr_count(self::$str, ')') != substr_count(self::$str, '('))) {
             return false;
         } else {
             if (self::$str[0] === ')' || self::$str[$strLength - 1] === '(') {
